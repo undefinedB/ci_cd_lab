@@ -1,3 +1,12 @@
+name: Go CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
   test:
     runs-on: ubuntu-latest
     steps:
@@ -12,11 +21,9 @@
       - name: Install dependencies
         run: go mod download
 
-    # TODO 01 - Add a step to run tests
       - name: Run Go tests
         run: go test ./...
 
-    # TODO 02 - Make sure that this job is run before `compile`
   compile:
     needs: test
     runs-on: ubuntu-latest
@@ -33,4 +40,4 @@
         run: go mod download
 
       - name: Compile binary
-        run: go build -o myapp 
+        run: go build -o myapp
